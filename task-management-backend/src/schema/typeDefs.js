@@ -1,0 +1,31 @@
+const { gql } = require('apollo-server-express');
+
+const typeDefs = gql`
+  type Task {
+    id: ID!
+    title: String!
+    description: String
+    status: String!
+    dueDate: String
+    createdAt: String!
+  }
+
+  input TaskInput {
+    title: String!
+    description: String
+    status: String
+    dueDate: String
+  }
+
+  type Query {
+    tasks(status: String): [Task]
+    task(id: ID!): Task
+  }
+
+  type Mutation {
+    addTask(input: TaskInput!): Task
+    updateTaskStatus(id: ID!, status: String!): Task
+  }
+`;
+
+module.exports = typeDefs;
